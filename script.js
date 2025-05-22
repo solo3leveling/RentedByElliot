@@ -29,7 +29,7 @@ const MoviePage = {
             </button>
           </div>
         </div>
-        <div class="movie-details">
+        <div class="movie-details animate__animated animate__fadeInUp">
           <h2 class="movie-title">{{ movie.title }}</h2>
           <p class="movie-tag"><i class="fas fa-tag"></i> {{ movie.tag }}</p>
           <p class="movie-meta"><strong>Genre:</strong> {{ movie.genre }}</p>
@@ -69,10 +69,10 @@ const MoviePage = {
               It costs just 1000 Naira (approx. $0.63) only. Rent now to dive into a mesmerizing animated adventure that transcends dimensions!
             </p>
             <div class="modal-buttons">
-              <button class="rent-button" @click="trackRent">
+              <button class="rent-button button button-primary" @click="trackRent">
                 <i class="fas fa-ticket-alt"></i> Rent Now
               </button>
-              <button class="dismiss-button" @click="closeModal">
+              <button class="dismiss-button button button-secondary" @click="closeModal">
                 <i class="fas fa-times"></i> Dismiss
               </button>
             </div>
@@ -201,7 +201,7 @@ const StreamingPage = {
       <!-- Comments Link on Streaming Page -->
       <div class="comments-link" style="text-align:center; margin-top:1rem;">
         <router-link to="/comments">
-          <button class="comments-button">
+          <button class="comments-button button button-primary">
             <i class="fas fa-comments"></i> Comments
           </button>
           <p style="font-size:0.9rem; color:#555;">
@@ -249,13 +249,16 @@ const VideoPage = {
       <div v-if="videoLink">
         <iframe :src="videoLink" frameborder="0" allowfullscreen width="100%" height="500px"></iframe>
       </div>
-      <div v-else>
-        Loading video...
+      <div v-else class="video-loading-placeholder">
+        <div class="loading-indicator-content">
+          <div class="spinner"></div>
+          <p>Loading video...</p>
+        </div>
       </div>
       <!-- Comments Link on Video Page -->
       <div class="comments-link" style="text-align:center; margin-top:1rem;">
         <router-link to="/comments">
-          <button class="comments-button">
+          <button class="comments-button button button-primary">
             <i class="fas fa-comments"></i> Comments
           </button>
           <p style="font-size:0.9rem; color:#555;">
@@ -339,7 +342,7 @@ const CommentsPage = {
         </div>
       </div>
       <!-- Sticky Comment Button -->
-      <button class="sticky-comment-btn" @click="openModal">Add Comment</button>
+      <button class="sticky-comment-btn button button-primary" @click="openModal">Add Comment</button>
       
       <!-- Modal for New Comment -->
       <transition name="modal">
@@ -355,8 +358,10 @@ const CommentsPage = {
               <input type="number" v-model.number="newComment.rating" min="1" max="10" required />
               <label>Comment</label>
               <textarea v-model="newComment.comment" required></textarea>
-              <button type="submit">Submit</button>
-              <button type="button" @click="closeModal">Cancel</button>
+              <div class="form-buttons-container">
+                <button type="submit" class="button button-primary">Submit</button>
+                <button type="button" @click="closeModal" class="button button-secondary">Cancel</button>
+              </div>
             </form>
           </div>
         </div>
